@@ -1,92 +1,143 @@
-# Hands On Rl
+# Hands-On Reinforcement Learning
 
+In this hands-on project, we will first implement a simple RL algorithm and apply it to solve the CartPole-v1 environment. Once we become familiar with the basic workflow, we will learn to use various tools for machine learning model training, monitoring, and sharing, by applying these tools to train a robotic arm.
 
+## To be handed in
 
-## Getting started
+This work must be done individually. The expected output is a repository named `hands-on-rl` on https://gitlab.ec-lyon.fr. It must contain a `README.md` file that explains **briefly** the successive steps of the project. Throughout the subject, you will find a 🛠 symbol indicating that a specific production is expected.
+The last commit is due before 11:59 pm on Monday, February 13, 2023. Subsequent commits will not be considered.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Introduction to Gym
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Gym is a framework for developing and evaluating reinforcement learning environments. It offers various environments, including classic control and toy text scenarios, to test RL algorithms.
 
-## Add your files
+### Installation
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.ec-lyon.fr/qgalloue/hands-on-rl.git
-git branch -M main
-git push -uf origin main
+```sh
+pip install gym==0.21
 ```
 
-## Integrate with your tools
+### Usage
 
-- [ ] [Set up project integrations](https://gitlab.ec-lyon.fr/qgalloue/hands-on-rl/-/settings/integrations)
+Here is an example of how to use Gym to solve the `Cartpole-v1` environment:
 
-## Collaborate with your team
+```python
+import gym
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+# Create the environment
+env = gym.make("Cartpole-v1")
 
-## Test and Deploy
+# Reset the environment and get the initial observation
+observation = env.reset()
 
-Use the built-in continuous integration in GitLab.
+for _ in range(100):
+    # Select a random action from the action space
+    action = env.action_space.sample()
+    # Apply the action to the environment 
+    # Returns next observation, reward, done signal (indicating
+    # if the episode has ended), and an additional info dictionary
+    observation, reward, done, info = env.step(action)
+    # Render the environment to visualize the agent's behavior
+    env.render() 
+```
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+## REINFORCE
 
-***
+The REINFORCE algorithm (also known as Vanilla Policy Gradient) is a policy gradient method that optimizes the policy directly using gradient descent. The following is the pseudocode of the REINFORCE algorithm:
 
-# Editing this README
+```txt
+Setup the Cartpole environment
+Setup the agent as a simple neural network with:
+    - One fully connected layer with 128 units and ReLU activation followed by a dropout layer
+    - One fully connected layer followed by softmax activation
+Repeat 500 times:
+    Reset the environment
+    Reset the buffer
+    Repeat until the end of the episode:
+        Compute and store in the buffer the action probabilities 
+        Sample the action based on the probabilities
+        Step the environment with the action
+        Compute and store in the buffer the return using gamma=0.99 
+    Normalize the return
+    Compute the policy loss as -sum(log(prob) * return)
+    Update the policy using an Adam optimizer and a learning rate of 5e-3
+```
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+🛠 Use PyTorch to implement REINFORCE and solve the Cartpole environement. Share the code in `reinforce.py`, and share a plot showing the return accross episodes in the `README.md`.
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+## Familiarization with a complete RL pipeline: Application to training a robotic arm
 
-## Name
-Choose a self-explaining name for your project.
+In this section, you will use the Stable-Baselines3 package to train a robotic arm using RL. You'll get familiar with several widely-used tools for training, monitoring and sharing machine learning models.
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+### Get familiar with Stable-Baselines3
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+Stable-Baselines3 (SB3) is a high-level RL library that provides various algorithms and integrated tools to easily train and test reinforcement learning models.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+#### Installation
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+```sh
+pip install stable-baselines3[extra]
+```
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+> ⚠️ If you use zsh as a shell, you'll need to use extra quote: `stable-baselines3"[extra]"`
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+#### Usage
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+Use the Stable-Baselines3 documentation and implement a code to solve the Cartpole environment.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+🛠 Store the code in `cartpole_sb3.py`. Unless otherwise state, you'll work upon this file for the next sections.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+### Get familiar with Hugging Face Hub
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+Hugging Face Hub is a platform for easy sharing and versioning of trained machine learning models. With Hugging Face Hub, you can quickly and easily share your models with others and make them usable through the API. For example, see the trained A2C agent for cartpole: https://huggingface.co/sb3/a2c-CartPole-v1. Hugging Face Hub provides an API to download and upload SB3 models.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+#### Installation of ̀ huggingface_sb3`
 
-## License
-For open source projects, say how it is licensed.
+```sh
+huggingface_sb3 pyglet==1.5.1
+```
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+#### Upload the model on the Hub
+
+Follow the Hugging Face Hub documentation to upload the previously learned model to the Hub.
+
+🛠 Link the trained model in the `README.md` file.
+
+### Get familiar with Weights & Biases
+
+Weights & Biases (W&B) is a tool for machine learning experiment management. With W&B, you can track and compare your experiments, visualize your model training and performance, and collaborate with your team.
+
+#### Installation
+
+
+```shell
+pip install wandb
+```
+
+Use the documentation of Stable-Baselines3 and Weights & Biases to track the Cartpole training. Make the run public.
+
+🛠 Share the link of the wandb run in the `README.md` file.
+
+### Get familiar with panda-gym
+
+Panda-gym is a collection of environments for robotic simulation and control. It provides a range of challenges for training robotic agents in a simulated environment. In this section, you will get familiar with one of the environments provided by panda-gym, the PandaReachJointsDense-v2.
+
+#### Installation
+
+```shell
+panda_gym==2.0.0
+```
+
+#### Train, track, and share
+
+Use the Stable-Baselines3 package to train A2C model on the `PandaReachJointsDense-v2` environment. 500k timesteps should be enough. Track the environment with Weights & Biases. Once the training is over, upload the trained model on the Hub.
+
+🛠 Share all the code in `panda_gym_sb3.py`. Share the link of the wandb run and the trained model in the `README.md` file.
+
+## Contribute
+
+This tutorial may contain errors, inaccuracies, typos or areas for improvement. Feel free to contribute to its improvement by opening an issue.
+
+## Author
+
+Quentin Gallouédec
