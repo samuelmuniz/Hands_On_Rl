@@ -94,7 +94,7 @@ Hugging Face Hub is a platform for easy sharing and versioning of trained machin
 #### Installation of ̀ huggingface_sb3`
 
 ```sh
-huggingface_sb3 pyglet==1.5.1
+pip install huggingface_sb3 pyglet==1.5.1
 ```
 
 #### Upload the model on the Hub
@@ -125,7 +125,7 @@ Panda-gym is a collection of environments for robotic simulation and control. It
 #### Installation
 
 ```shell
-panda_gym==2.0.0
+pip install panda_gym==2.0.0
 ```
 
 #### Train, track, and share
