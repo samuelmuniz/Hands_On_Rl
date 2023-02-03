@@ -7,6 +7,9 @@ In this hands-on project, we will first implement a simple RL algorithm and appl
 This work must be done individually. The expected output is a repository named `hands-on-rl` on https://gitlab.ec-lyon.fr. It must contain a `README.md` file that explains **briefly** the successive steps of the project. Throughout the subject, you will find a 🛠 symbol indicating that a specific production is expected.
 The last commit is due before 11:59 pm on Monday, February 13, 2023. Subsequent commits will not be considered.
 
+> ⚠️ **Warning**
+> Ensure that you only commit the files that are requested. For example, your directory should not contain the generated `.zip` files, nor the `runs` folder... At the end, your repository must contain one `README.md`, three python scripts, and optionally image files for the plots.
+
 ## Introduction to Gym
 
 Gym is a framework for developing and evaluating reinforcement learning environments. It offers various environments, including classic control and toy text scenarios, to test RL algorithms.
@@ -63,7 +66,8 @@ Repeat 500 times:
     Update the policy using an Adam optimizer and a learning rate of 5e-3
 ```
 
-🛠 Use PyTorch to implement REINFORCE and solve the CartPole environement. Share the code in `reinforce.py`, and share a plot showing the total reward accross episodes in the `README.md`.
+> 🛠 **To be handed in**
+> Use PyTorch to implement REINFORCE and solve the CartPole environement. Share the code in `reinforce_cartpole.py`, and share a plot showing the total reward accross episodes in the `README.md`.
 
 ## Familiarization with a complete RL pipeline: Application to training a robotic arm
 
@@ -79,36 +83,42 @@ Stable-Baselines3 (SB3) is a high-level RL library that provides various algorit
 pip install stable-baselines3[extra]
 ```
 
-> ⚠️ If you use zsh as a shell, you'll need to use extra quote: `stable-baselines3"[extra]"`
+> ⚠️ **Warning**
+> If you use zsh as a shell, you'll need to use extra quote: `stable-baselines3"[extra]"`
 
 #### Usage
 
 Use the Stable-Baselines3 documentation and implement code to solve the CartPole environment with the Advantage Actor-Critic (A2C) algorithm.
 
-🛠 Store the code in `cartpole_sb3.py`. Unless otherwise state, you'll work upon this file for the next sections.
+
+> 🛠 **To be handed in**
+> Store the code in `a2c_sb3_cartpole.py`. Unless otherwise stated, you'll work upon this file for the next sections.
 
 ### Get familiar with Hugging Face Hub
 
 Hugging Face Hub is a platform for easy sharing and versioning of trained machine learning models. With Hugging Face Hub, you can quickly and easily share your models with others and make them usable through the API. For example, see the trained A2C agent for CartPole: https://huggingface.co/sb3/a2c-CartPole-v1. Hugging Face Hub provides an API to download and upload SB3 models.
 
-#### Installation of ̀ huggingface_sb3`
+#### Installation of `huggingface_sb3`
 
 ```sh
-pip install huggingface_sb3 pyglet==1.5.1
+pip install huggingface_sb3
 ```
 
 #### Upload the model on the Hub
 
 Follow the Hugging Face Hub documentation to upload the previously learned model to the Hub.
 
-🛠 Link the trained model in the `README.md` file.
+> 🛠 **To be handed in**
+> Link the trained model in the `README.md` file.
+
+> 📝 **Note**
+>  [RL-Zoo3](https://stable-baselines3.readthedocs.io/en/master/guide/rl_zoo.html) provides more advanced features to save hyperparameters, generate renderings and metrics. Feel free to try them.
 
 ### Get familiar with Weights & Biases
 
-Weights & Biases (W&B) is a tool for machine learning experiment management. With W&B, you can track and compare your experiments, visualize your model training and performance, and collaborate with your team.
+Weights & Biases (W&B) is a tool for machine learning experiment management. With W&B, you can track and compare your experiments, visualize your model training and performance.
 
 #### Installation
-
 
 ```shell
 pip install wandb
@@ -118,9 +128,12 @@ Use the documentation of Stable-Baselines3 and Weights & Biases to track the Car
 
 🛠 Share the link of the wandb run in the `README.md` file.
 
-### Get familiar with panda-gym
+> ⚠️ **Warning**
+> Make sure to make the run public!
 
-Panda-gym is a collection of environments for robotic simulation and control. It provides a range of challenges for training robotic agents in a simulated environment. In this section, you will get familiar with one of the environments provided by panda-gym, the PandaReachJointsDense-v2.
+### Full workflow with panda-gym
+
+Panda-gym is a collection of environments for robotic simulation and control. It provides a range of challenges for training robotic agents in a simulated environment. In this section, you will get familiar with one of the environments provided by panda-gym, the `PandaReachJointsDense-v2`. The objective is to learn how to reach any point in 3D space by directly controlling the robot's articulations.
 
 #### Installation
 
@@ -132,7 +145,8 @@ pip install panda_gym==2.0.0
 
 Use the Stable-Baselines3 package to train A2C model on the `PandaReachJointsDense-v2` environment. 500k timesteps should be enough. Track the environment with Weights & Biases. Once the training is over, upload the trained model on the Hub.
 
-🛠 Share all the code in `panda_gym_sb3.py`. Share the link of the wandb run and the trained model in the `README.md` file.
+> 🛠 **To be handed in**
+> Share all the code in `a2c_sb3_panda_reach.py`. Share the link of the wandb run and the trained model in the `README.md` file.
 
 ## Contribute
 
@@ -141,3 +155,7 @@ This tutorial may contain errors, inaccuracies, typos or areas for improvement. 
 ## Author
 
 Quentin Gallouédec
+
+## License
+
+MIT
