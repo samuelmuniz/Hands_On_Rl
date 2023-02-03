@@ -54,8 +54,8 @@ Repeat 500 times:
     Reset the environment
     Reset the buffer
     Repeat until the end of the episode:
-        Compute and store in the buffer the action probabilities 
-        Sample the action based on the probabilities
+        Compute action probabilities 
+        Sample the action based on the probabilities and store its probability in the buffer 
         Step the environment with the action
         Compute and store in the buffer the return using gamma=0.99 
     Normalize the return
