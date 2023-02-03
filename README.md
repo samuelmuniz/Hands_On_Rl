@@ -63,7 +63,7 @@ Repeat 500 times:
     Update the policy using an Adam optimizer and a learning rate of 5e-3
 ```
 
-🛠 Use PyTorch to implement REINFORCE and solve the CartPole environement. Share the code in `reinforce.py`, and share a plot showing the return accross episodes in the `README.md`.
+🛠 Use PyTorch to implement REINFORCE and solve the CartPole environement. Share the code in `reinforce.py`, and share a plot showing the total reward accross episodes in the `README.md`.
 
 ## Familiarization with a complete RL pipeline: Application to training a robotic arm
 
@@ -83,7 +83,7 @@ pip install stable-baselines3[extra]
 
 #### Usage
 
-Use the Stable-Baselines3 documentation and implement a code to solve the CartPole environment.
+Use the Stable-Baselines3 documentation and implement code to solve the CartPole environment with the Advantage Actor-Critic (A2C) algorithm.
 
 🛠 Store the code in `cartpole_sb3.py`. Unless otherwise state, you'll work upon this file for the next sections.
 
