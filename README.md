@@ -19,13 +19,13 @@ pip install gym==0.21
 
 ### Usage
 
-Here is an example of how to use Gym to solve the `Cartpole-v1` environment:
+Here is an example of how to use Gym to solve the `CartPole-v1` environment:
 
 ```python
 import gym
 
 # Create the environment
-env = gym.make("Cartpole-v1")
+env = gym.make("CartPole-v1")
 
 # Reset the environment and get the initial observation
 observation = env.reset()
@@ -46,7 +46,7 @@ for _ in range(100):
 The REINFORCE algorithm (also known as Vanilla Policy Gradient) is a policy gradient method that optimizes the policy directly using gradient descent. The following is the pseudocode of the REINFORCE algorithm:
 
 ```txt
-Setup the Cartpole environment
+Setup the CartPole environment
 Setup the agent as a simple neural network with:
     - One fully connected layer with 128 units and ReLU activation followed by a dropout layer
     - One fully connected layer followed by softmax activation
@@ -63,7 +63,7 @@ Repeat 500 times:
     Update the policy using an Adam optimizer and a learning rate of 5e-3
 ```
 
-🛠 Use PyTorch to implement REINFORCE and solve the Cartpole environement. Share the code in `reinforce.py`, and share a plot showing the return accross episodes in the `README.md`.
+🛠 Use PyTorch to implement REINFORCE and solve the CartPole environement. Share the code in `reinforce.py`, and share a plot showing the return accross episodes in the `README.md`.
 
 ## Familiarization with a complete RL pipeline: Application to training a robotic arm
 
@@ -83,13 +83,13 @@ pip install stable-baselines3[extra]
 
 #### Usage
 
-Use the Stable-Baselines3 documentation and implement a code to solve the Cartpole environment.
+Use the Stable-Baselines3 documentation and implement a code to solve the CartPole environment.
 
 🛠 Store the code in `cartpole_sb3.py`. Unless otherwise state, you'll work upon this file for the next sections.
 
 ### Get familiar with Hugging Face Hub
 
-Hugging Face Hub is a platform for easy sharing and versioning of trained machine learning models. With Hugging Face Hub, you can quickly and easily share your models with others and make them usable through the API. For example, see the trained A2C agent for cartpole: https://huggingface.co/sb3/a2c-CartPole-v1. Hugging Face Hub provides an API to download and upload SB3 models.
+Hugging Face Hub is a platform for easy sharing and versioning of trained machine learning models. With Hugging Face Hub, you can quickly and easily share your models with others and make them usable through the API. For example, see the trained A2C agent for CartPole: https://huggingface.co/sb3/a2c-CartPole-v1. Hugging Face Hub provides an API to download and upload SB3 models.
 
 #### Installation of ̀ huggingface_sb3`
 
@@ -114,7 +114,7 @@ Weights & Biases (W&B) is a tool for machine learning experiment management. Wit
 pip install wandb
 ```
 
-Use the documentation of Stable-Baselines3 and Weights & Biases to track the Cartpole training. Make the run public.
+Use the documentation of Stable-Baselines3 and Weights & Biases to track the CartPole training. Make the run public.
 
 🛠 Share the link of the wandb run in the `README.md` file.
 
