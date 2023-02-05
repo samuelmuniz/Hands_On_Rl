@@ -94,7 +94,7 @@ pip install stable-baselines3[extra]
 
 #### Usage
 
-Use the Stable-Baselines3 documentation and implement code to solve the CartPole environment with the Advantage Actor-Critic (A2C) algorithm.
+Use the [Stable-Baselines3 documentation](https://stable-baselines3.readthedocs.io/en/master/) to implement the code to solve the CartPole environment with the Advantage Actor-Critic (A2C) algorithm.
 
 
 > 🛠 **To be handed in**
@@ -112,7 +112,7 @@ pip install huggingface_sb3
 
 #### Upload the model on the Hub
 
-Follow the Hugging Face Hub documentation to upload the previously learned model to the Hub.
+Follow the [Hugging Face Hub documentation](https://huggingface.co/docs/hub/index) to upload the previously learned model to the Hub.
 
 > 🛠 **To be handed in**
 > Link the trained model in the `README.md` file.
@@ -130,7 +130,7 @@ Weights & Biases (W&B) is a tool for machine learning experiment management. Wit
 pip install wandb
 ```
 
-Use the documentation of Stable-Baselines3 and Weights & Biases to track the CartPole training. Make the run public.
+Use the documentation of Stable-Baselines3 and [Weights & Biases](https://docs.wandb.ai) to track the CartPole training. Make the run public.
 
 🛠 Share the link of the wandb run in the `README.md` file.
 
