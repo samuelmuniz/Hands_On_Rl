@@ -70,6 +70,8 @@ Repeat 500 times:
     Update the policy using an Adam optimizer and a learning rate of 5e-3
 ```
 
+To learn more about REINFORCE, you can refer to [this unit](https://huggingface.co/blog/deep-rl-pg).
+
 > 🛠 **To be handed in**
 > Use PyTorch to implement REINFORCE and solve the CartPole environement. Share the code in `reinforce_cartpole.py`, and share a plot showing the total reward accross episodes in the `README.md`.
 
