@@ -10,6 +10,10 @@ The last commit is due before 11:59 pm on Monday, February 13, 2023. Subsequent 
 > ⚠️ **Warning**
 > Ensure that you only commit the files that are requested. For example, your directory should not contain the generated `.zip` files, nor the `runs` folder... At the end, your repository must contain one `README.md`, three python scripts, and optionally image files for the plots.
 
+## Before you start
+
+Make sure you know the basics of Reinforcement Learning. In case of need, you can refer to the [introduction of the Hugging Face RL course](https://huggingface.co/blog/deep-rl-intro).
+
 ## Introduction to Gym
 
 Gym is a framework for developing and evaluating reinforcement learning environments. It offers various environments, including classic control and toy text scenarios, to test RL algorithms.
