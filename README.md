@@ -92,7 +92,7 @@ Stable-Baselines3 (SB3) is a high-level RL library that provides various algorit
 #### Installation
 
 ```sh
-pip install stable-baselines3[extra]
+pip install stable-baselines3
 ```
 
 > ⚠️ **Warning**
