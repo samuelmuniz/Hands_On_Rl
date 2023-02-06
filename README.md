@@ -24,6 +24,12 @@ Gym is a framework for developing and evaluating reinforcement learning environm
 pip install gym==0.21
 ```
 
+Install also pyglet for the rendering.
+
+```sh
+pip install pyglet==1.5.27
+```
+
 ### Usage
 
 Here is an example of how to use Gym to solve the `CartPole-v1` environment:
