@@ -129,8 +129,10 @@ Weights & Biases (W&B) is a tool for machine learning experiment management. Wit
 
 #### Installation
 
+You'll need to install both `wand` and `tensorboar`.
+
 ```shell
-pip install wandb
+pip install wandb tensorboard
 ```
 
 Use the documentation of Stable-Baselines3 and [Weights & Biases](https://docs.wandb.ai) to track the CartPole training. Make the run public.
