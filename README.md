@@ -95,9 +95,6 @@ Stable-Baselines3 (SB3) is a high-level RL library that provides various algorit
 pip install stable-baselines3
 ```
 
-> ⚠️ **Warning**
-> If you use zsh as a shell, you'll need to use extra quote: `stable-baselines3"[extra]"`
-
 #### Usage
 
 Use the [Stable-Baselines3 documentation](https://stable-baselines3.readthedocs.io/en/master/) to implement the code to solve the CartPole environment with the Advantage Actor-Critic (A2C) algorithm.
