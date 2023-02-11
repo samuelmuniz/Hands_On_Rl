@@ -1,66 +1,16 @@
-# Hands-On Reinforcement Learning
+# BE 1 REINFORCE LEARNING wit GYM libraries
 
-In this hands-on project, we will first implement a simple RL algorithm and apply it to solve the CartPole-v1 environment. Once we become familiar with the basic workflow, we will learn to use various tools for machine learning model training, monitoring, and sharing, by applying these tools to train a robotic arm.
+## GYM
+Gym is a toolkit for developing and comparing reinforcement learning algorithms. It provides a variety of environments, such as classic control and toy text problems, that serve as a testbed for reinforcement learning algorithms. These environments are used to evaluate and compare the performance of different algorithms in a standardized way. The library has a simple interface that allows developers to easily create new environments, which makes it a versatile tool for experimentation and research in the field of reinforcement learning.
 
-## To be handed in
+## pyTORCH
+It provides a variety of tools and libraries for building, training, and testing deep neural networks. PyTorch is widely used in the fields of computer vision, natural language processing, and reinforcement learning. In reinforcement learning, PyTorch can be used to build neural networks that can be used as function approximators for value or policy functions.
 
-This work must be done individually. The expected output is a repository named `hands-on-rl` on https://gitlab.ec-lyon.fr. It must contain a `README.md` file that explains **briefly** the successive steps of the project. Throughout the subject, you will find a 🛠 symbol indicating that a specific production is expected.
-The last commit is due before 11:59 pm on Monday, February 13, 2023. Subsequent commits will not be considered.
+## a2c_sb3_cartpole.py
 
-> ⚠️ **Warning**
-> Ensure that you only commit the files that are requested. For example, your directory should not contain the generated `.zip` files, nor the `runs` folder... At the end, your repository must contain one `README.md`, three python scripts, and optionally image files for the plots.
+This file is the implementation of the reinforcing learnin in the GYM model with the following specs :
 
-## Before you start
-
-Make sure you know the basics of Reinforcement Learning. In case of need, you can refer to the [introduction of the Hugging Face RL course](https://huggingface.co/blog/deep-rl-intro).
-
-## Introduction to Gym
-
-Gym is a framework for developing and evaluating reinforcement learning environments. It offers various environments, including classic control and toy text scenarios, to test RL algorithms.
-
-### Installation
-
-```sh
-pip install gym==0.21
-```
-
-Install also pyglet for the rendering.
-
-```sh
-pip install pyglet==1.5.27
-```
-
-### Usage
-
-Here is an example of how to use Gym to solve the `CartPole-v1` environment:
-
-```python
-import gym
-
-# Create the environment
-env = gym.make("CartPole-v1")
-
-# Reset the environment and get the initial observation
-observation = env.reset()
-
-for _ in range(100):
-    # Select a random action from the action space
-    action = env.action_space.sample()
-    # Apply the action to the environment 
-    # Returns next observation, reward, done signal (indicating
-    # if the episode has ended), and an additional info dictionary
-    observation, reward, done, info = env.step(action)
-    # Render the environment to visualize the agent's behavior
-    env.render() 
-```
-
-## REINFORCE
-
-The REINFORCE algorithm (also known as Vanilla Policy Gradient) is a policy gradient method that optimizes the policy directly using gradient descent. The following is the pseudocode of the REINFORCE algorithm:
-
-```txt
-Setup the CartPole environment
-Setup the agent as a simple neural network with:
+"Setup the agent as a simple neural network with:
     - One fully connected layer with 128 units and ReLU activation followed by a dropout layer
     - One fully connected layer followed by softmax activation
 Repeat 500 times:
@@ -74,99 +24,34 @@ Repeat 500 times:
     Normalize the return
     Compute the policy loss as -sum(log(prob) * return)
     Update the policy using an Adam optimizer and a learning rate of 5e-3
-```
+"
 
-To learn more about REINFORCE, you can refer to [this unit](https://huggingface.co/blog/deep-rl-pg).
+## A2C ALGORITHM
 
-> 🛠 **To be handed in**
-> Use PyTorch to implement REINFORCE and solve the CartPole environement. Share the code in `reinforce_cartpole.py`, and share a plot showing the total reward accross episodes in the `README.md`.
+Advantage Actor-Critic (A2C) is a reinforcement learning algorithm that combines ideas from both the Actor-Critic and Q-Learning algorithms. It is an on-policy algorithm, which means that it learns from the actions taken in the environment and updates its policy accordingly.
 
-## Familiarization with a complete RL pipeline: Application to training a robotic arm
+In the A2C algorithm, the "Actor" part of the algorithm represents the policy, which maps states to actions. The "Critic" part of the algorithm represents the value function, which estimates the expected future reward for a given state or state-action pair. The advantage function is used to estimate the difference between the expected reward and the value of a state-action pair.
 
-In this section, you will use the Stable-Baselines3 package to train a robotic arm using RL. You'll get familiar with several widely-used tools for training, monitoring and sharing machine learning models.
+## ENVIROMENTS
 
-### Get familiar with Stable-Baselines3
+In this BE we'll use two GYM enviroments in order to apply the A2C algorithm:
 
-Stable-Baselines3 (SB3) is a high-level RL library that provides various algorithms and integrated tools to easily train and test reinforcement learning models.
+### CartPole-v1 (a2c_sb3_cartpole.py)
 
-#### Installation
+CartPole-v1 is a classic reinforcement learning environment that is widely used for testing and evaluating different reinforcement learning algorithms. It is included in the OpenAI Gym library, which provides a standardized interface for evaluating reinforcement learning algorithms.
 
-```sh
-pip install stable-baselines3
-```
+### PandaReachJointsDense-v2 (a2c_sb3_panda_reach.py)
 
-#### Usage
+In the PandaReachJointsDense-v2 environment, a robot arm is tasked with reaching a target location in a three-dimensional workspace. The arm is equipped with seven joints and can move in a variety of ways to reach the target. The state of the environment is defined by the position and velocity of the arm joints, as well as the position of the target. The action space consists of the torques applied to each of the seven joints at each time step.
 
-Use the [Stable-Baselines3 documentation](https://stable-baselines3.readthedocs.io/en/master/) to implement the code to solve the CartPole environment with the Advantage Actor-Critic (A2C) algorithm.
+## Platforms
+For a matter of simplicity, we'll use the following online platforms to apply the A2C algorithms:
 
+### Hugging Face Hub
 
-> 🛠 **To be handed in**
-> Store the code in `a2c_sb3_cartpole.py`. Unless otherwise stated, you'll work upon this file for the next sections.
+Hugging Face Hub is a platform developed by Hugging Face, a company that provides NLP tools and services. It is designed to make it easy for researchers, developers, and data scientists to use state-of-the-art NLP models in their projects.
 
-### Get familiar with Hugging Face Hub
+### Weights and Bias
 
-Hugging Face Hub is a platform for easy sharing and versioning of trained machine learning models. With Hugging Face Hub, you can quickly and easily share your models with others and make them usable through the API. For example, see the trained A2C agent for CartPole: https://huggingface.co/sb3/a2c-CartPole-v1. Hugging Face Hub provides an API to download and upload SB3 models.
+Weights & Biases is an online platform that provides tools for deep learning researchers, data scientists, and engineers. It is designed to make it easier to develop, train, and monitor deep learning models.
 
-#### Installation of `huggingface_sb3`
-
-```sh
-pip install huggingface_sb3
-```
-
-#### Upload the model on the Hub
-
-Follow the [Hugging Face Hub documentation](https://huggingface.co/docs/hub/index) to upload the previously learned model to the Hub.
-
-> 🛠 **To be handed in**
-> Link the trained model in the `README.md` file.
-
-> 📝 **Note**
->  [RL-Zoo3](https://stable-baselines3.readthedocs.io/en/master/guide/rl_zoo.html) provides more advanced features to save hyperparameters, generate renderings and metrics. Feel free to try them.
-
-### Get familiar with Weights & Biases
-
-Weights & Biases (W&B) is a tool for machine learning experiment management. With W&B, you can track and compare your experiments, visualize your model training and performance.
-
-#### Installation
-
-You'll need to install both `wand` and `tensorboar`.
-
-```shell
-pip install wandb tensorboard
-```
-
-Use the documentation of Stable-Baselines3 and [Weights & Biases](https://docs.wandb.ai) to track the CartPole training. Make the run public.
-
-🛠 Share the link of the wandb run in the `README.md` file.
-
-> ⚠️ **Warning**
-> Make sure to make the run public!
-
-### Full workflow with panda-gym
-
-Panda-gym is a collection of environments for robotic simulation and control. It provides a range of challenges for training robotic agents in a simulated environment. In this section, you will get familiar with one of the environments provided by panda-gym, the `PandaReachJointsDense-v2`. The objective is to learn how to reach any point in 3D space by directly controlling the robot's articulations.
-
-#### Installation
-
-```shell
-pip install panda_gym==2.0.0
-```
-
-#### Train, track, and share
-
-Use the Stable-Baselines3 package to train A2C model on the `PandaReachJointsDense-v2` environment. 500k timesteps should be enough. Track the environment with Weights & Biases. Once the training is over, upload the trained model on the Hub.
-
-> 🛠 **To be handed in**
-> Share all the code in `a2c_sb3_panda_reach.py`. Share the link of the wandb run and the trained model in the `README.md` file.
-
-## Contribute
-
-This tutorial may contain errors, inaccuracies, typos or areas for improvement. Feel free to contribute to its improvement by opening an issue.
-
-## Author
-
-Quentin Gallouédec
-
-## License
-
-MIT
